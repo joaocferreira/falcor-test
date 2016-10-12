@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<div id='event-data'></div>
+<script src="https://netflix.github.io/falcor/build/falcor.browser.js"></script>
+<script type="text/javascript">
+  var model = new falcor.Model({source: new falcor.HttpDataSource('/model.json') });
+  model
+  .get(["events", {from: 0, to: 2}, ["name", "description"]],
+        ["events", {from: 0, to: 2}, 'location',['city']])
+  .then(function(response) {
+    console.log(response);
+    document.getElementById('event-data').innerHTML = JSON.stringify(response, null, 2);
+  });
+</script>
+</body>
+</html>
